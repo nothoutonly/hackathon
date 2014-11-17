@@ -10,13 +10,15 @@
 	<title>日新邮包</title>
 	<link rel="stylesheet" type="text/css" href="./css/reset.css">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<script type="text/javascript" src="./script/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="./script/m-post.js"></script>
 </head>
 <body>
 	<!--header-->
 	<div id="header">
 		<div id="head">
 			<div id="logo"><a href="http://post.ecjtu.net/">日新邮包</a></div>
-			<div id="searchBar"><a href="">搜索框及菜单</a></div>
+			<div class="searchBar"><a href="#">搜索框及菜单</a></div>
 		</div>
 	</div>
 	<!--container-->
@@ -52,23 +54,23 @@
 		</p>
 	</div>
 <!--菜单栏-->
-	<div id="nav">
+	<div class="nav">
 		<div id="search">
 			<input type="text" placeholder="请输入收件人的姓名"/>
 			<button id="btn"></button>
 		</div>
 		<div id="south-north">
-			<div id="south"><div id="southLogo"></div><a href="">南区</a></div>
-			<div id="north"><div id="northLogo"></div><a href="">北区</a></div>
+			<div id="south"><div id="southLogo" class="southLogo"></div><a href="">南区</a></div>
+			<div id="north"><div id="northLogo" class="northLogo"></div><a href="">北区</a></div>
 		</div>
 		<h2 id="line"></h2>
 		<div id="sort">
 			<ul>
-				<li><a href=""><span class="iconparcei"></span><span class="chn">包        裹</span><span class="eng">parcei</span></a></li>
+				<li><a href=""><span class="iconparcei"></span><span class="chn">包        		裹</span><span class="eng">parcei</span></a></li>
 				<li><a href=""><span class="iconpost"></span><span class="chn">挂号信</span><span class="eng">registered&nbsp;post</span></a></li>
 				<li><a href=""><span class="iconprint"></span><span class="chn">印刷品</span><span class="eng">print</span></a></li>
 				<li><a href=""><span class="iconorder"></span><span class="chn">汇款单</span><span class="eng">miney&nbsp;order</span></a></li>
-				<li><a href=""><span class="iconreturn"></span><span class="chn">退        件</span><span class="eng">return</span></a></li>
+				<li><a href=""><span class="iconreturn"></span><span class="chn">退        		件</span><span class="eng">return</span></a></li>
 			</ul>
 		</div>
 	</div>

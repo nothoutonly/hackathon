@@ -23,17 +23,17 @@
 				color: transparent;
 				font-size: 0.001em;
 			}
-		#searchBar{
+		.searchBar{
 			width: 30px;
 			height: 22px;
 			float: right;
-			margin: 0 7%;
+			margin-right: 7%;
 			background: #acd9bf url(../images/sprite.png) -104px 0 no-repeat;
 		}
-			#searchBar a{
+			.searchBar a{
 				display: block;
 				color: transparent;
-				font-size: 0.0001em;
+				font-size: 0.01em;
 			}
 
 /*		container		*/
@@ -110,13 +110,14 @@
 
 
 /*		navagation		*/
-#nav{
-	width: 160px;
+.nav{
+	width: 43%;
 	height: 600px;
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: rgba(0,0,0,.8); 
+	background-color: rgba(0,0,0,.8);
+	display: none;
 }
 	/*		searchBar		*/
 	#search{
@@ -179,11 +180,15 @@
 		}
 			#southLogo{
 				width:43px;
-				height: 100%;
-				background: url(../images/sprite.png) -45px -67px no-repeat;
+				height: 100%;	
 				float: left;
 			}
-
+			.southLogo{
+				background: url(../images/sprite.png) -45px -67px no-repeat;
+			}
+			.southLogoFocus{
+				background: url(../images/sprite.png) -45px -23px no-repeat;
+			}
 			#south a{
 				font: normal 1.25em "Microsoft Yahei",Sans-Serif;
 				color: #fff;
@@ -201,8 +206,13 @@
 			#northLogo{
 				width:43px;
 				height: 100%;
-				background: url(../images/sprite.png) 0 -67px no-repeat;
 				float: left;
+			}
+			.northLogo{
+				background: url(../images/sprite.png) 0 -67px no-repeat;
+			}
+			.northLogoFocus{
+				background: url(../images/sprite.png) 0 -23px no-repeat;
 			}
 
 			#north a{
@@ -224,20 +234,27 @@
 
 /*分类栏*/
 #sort{
-	margin: 8% auto;
+	margin: 6% auto;
 }
 	#sort ul{
-
+		width: 90%;
+		margin: 0 auto;
 	}
 		#sort ul li{
-			
+			margin: 16px auto;
+			padding: 2px 0;
+			display: block;
+			border-radius: 4px;
 		}
 			#sort ul li a{
-				width: 120px;
-				height: 30px;
 				display: block;
-				margin: 8px auto;
-				padding: 8px;
+			}
+			#sort ul li a:after{
+				content: ".";
+				display: block;
+				height: 0;
+				clear: both;
+				visibility: hidden;
 			}
 				.iconparcei,.iconpost,.iconprint,.iconorder,.iconreturn{
 					width: 14px;
@@ -278,3 +295,16 @@
 					float: left;
 					margin-left: 32px;
 				}
+
+/*		搜索菜单的样式		*/
+.menuplay{
+	display: block;
+}
+	.barplay{
+		margin-right: 45%;
+	}
+/*		搜索项的背景样式		*/
+
+.sortbg{
+	background-color: #000;
+}
