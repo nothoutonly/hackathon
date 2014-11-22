@@ -1,24 +1,24 @@
 $(document).ready(function() {
-	$('.searchBar a').click(function (event) {// 控制搜索菜单的display
+	$('.searchBar a').on('click', function (event) {// 控制搜索菜单的弹出
 		event.preventDefault();
-		// console.log($(this).parent('.searchBar').hasClass('barplay'))
-		if ($(this).parent('.searchBar').hasClass('barplay')) {
-			$(this).parent('.searchBar').removeClass('barplay');
-			var idx = $(this).index();
-			$('.nav').eq(idx).removeClass('menuplay');
-		} else {
-			$(this).parent('.searchBar').addClass('barplay');
-			var idx = $(this).index();
-			$('.nav').eq(idx).addClass('menuplay');
-		}
+		$(this).parents('#header').siblings('.nav').addClass('menuplay').animate({"opacity":"1","right":"0%"}, 200);
+		$('.bg').addClass('addbg');
 	});
+	$('.bg').on('click',function (event) {// 控制搜索菜单的缩回
+		$('.nav').animate({"right": "-43%"}, 200).css("right": "0");
+		$(this).removeClass('addbg');
+	});
+
 
 	$('#south a').click(function (event) {// 控制南区搜索项的背景图
 		event.preventDefault();
-		if ($(this).siblings('#southLogo').hasClass('southLogo')) {
+		if ($(this).siblings('#southLogo').hasClass('southLogoFoucus')) {
 			$(this).parent().siblings().children('#northLogo').removeClass('northLogoFocus')
 			.end.siblings().removeClass('southLogo').addClass('southLogoFocus');
-
+		} else {
+			$(this).parent().siblings().children('#northLogo').removeClass('northLogoFocus')
+			.end.siblings('#southLogo').addClass('southLogoFocus').removeClass('southLogo');
+			console.log();
 		}
 	});
 	$('#north a').click(function (event) {// 控制北区搜索项的背景图
@@ -43,7 +43,7 @@ $(document).ready(function() {
 	});*/
 	$('sort li').click( function (event) {
 		event.preventDefault();
-		if ( $(this).attr('class') !=='sortbg') {
+		if ( $(this).hasClass('sortbg')) {
 			$(this).siblings('.sortbg').removeClass('sortbg')
 			.end().addClass('sortbg');
 		}

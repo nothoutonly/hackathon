@@ -1,9 +1,24 @@
+/*		全局设置		*/
+a, img {
+    -webkit-touch-callout: none; /* 禁止长按链接与图片弹出菜单 */
+}
+html, body {
+    -webkit-user-select: none;   /* 禁止选中文本（如无文本选中需求，此为必选项） */
+    user-select: none; 
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+}
+
 /*		header		*/
 #header{
 	width: 100%;
 	height: 40px;
 	background: #acd9bf;
-	margin-bottom: 4px;
+	border-bottom: 4px solid #72a286;
 }
 	#head{
 		width: 100%;
@@ -12,7 +27,7 @@
 		margin-top: 10px; 
 	}
 		#logo{
-			width: 100px;
+			width: 105px;
 			height: 22px;
 			background: #acd9bf url(../images/sprite.png) 0 0 no-repeat;
 			float: left;
@@ -28,7 +43,7 @@
 			height: 22px;
 			float: right;
 			margin-right: 7%;
-			background: #acd9bf url(../images/sprite.png) -104px 0 no-repeat;
+			background: #acd9bf url(../images/sprite.png) -109px 0 no-repeat;
 		}
 			.searchBar a{
 				display: block;
@@ -51,7 +66,7 @@
 		margin: 16px auto 0;
 		border-radius: 16px;
 		-moz-border-radius: 16px;
-		background-color: rgba(0,0,0,.17);
+		background-color: rgba(0,0,0,.34);
 
 	}
 		#Box{
@@ -97,8 +112,8 @@
 }
 	#footicon{
 		width: 18px;
-		height: 14px;
-		background: url(../images/sprite.png) -90px -97px no-repeat;
+		height: 10px;
+		background: url(../images/sprite.png) -90px -100px no-repeat;
 		display: inline-block;
 		position: relative;
 		top: 6px;
@@ -115,10 +130,14 @@
 	height: 600px;
 	position: absolute;
 	top: 0;
-	right: 0;
 	background-color: rgba(0,0,0,.8);
-	display: none;
+	overflow: hidden;
+	opacity: 0;
 }
+	.menuplay{
+		right: -43%;
+		z-index: 3;
+	}
 	/*		searchBar		*/
 	#search{
 		width: 91%;			
@@ -136,7 +155,7 @@
 		}
 			#search input:input-placeholder{
 				color: #000;
-				font: normal 1em "Microsoft YaHei",Sans-Serif;
+				font: normal 10px "Microsoft YaHei",Sans-Serif;
 			}
 			#search input:-webkit-input-placeholder{
 				color: #000;
@@ -155,14 +174,13 @@
 			float: right;
 			padding: 0;
 			position: relative;
-			top: 6px;
+			top: 4px;
 			right: 5px;
 			background-color: #f9f9f8; 
-		}
-		button#btn{
 			width: 26px;
 			height: 27px;
 			background: url(../images/sprite.png) -117px -47px no-repeat;
+			margin-left: -26px;
 		}
 
 
@@ -184,10 +202,10 @@
 				float: left;
 			}
 			.southLogo{
-				background: url(../images/sprite.png) -45px -67px no-repeat;
+				background: url(../images/sprite.png) -45px -66px no-repeat;
 			}
 			.southLogoFocus{
-				background: url(../images/sprite.png) -45px -23px no-repeat;
+				background: url(../images/sprite.png) -45px -24px no-repeat;
 			}
 			#south a{
 				font: normal 1.25em "Microsoft Yahei",Sans-Serif;
@@ -212,7 +230,7 @@
 				background: url(../images/sprite.png) 0 -67px no-repeat;
 			}
 			.northLogoFocus{
-				background: url(../images/sprite.png) 0 -23px no-repeat;
+				background: url(../images/sprite.png) 0 -24px no-repeat;
 			}
 
 			#north a{
@@ -222,7 +240,6 @@
 				line-height: 43px;
 				text-decoration: none;
 				text-align: center;
-				margin-left: ;
 			}
 
 #line{
@@ -237,74 +254,70 @@
 	margin: 6% auto;
 }
 	#sort ul{
-		width: 90%;
+		width: 80%;
 		margin: 0 auto;
 	}
 		#sort ul li{
 			margin: 16px auto;
-			padding: 2px 0;
+			padding: 6px;
 			display: block;
 			border-radius: 4px;
-		}
-			#sort ul li a{
-				display: block;
+		}		
+			.iconparcel,.iconpost,.iconprint,.iconorder,.iconreturn{
+				width: 14px;
+				height: 15px;					
+				float: left;
+				position: relative;
+				top: 4px;
+				left: 6px;
 			}
-			#sort ul li a:after{
-				content: ".";
-				display: block;
-				height: 0;
-				clear: both;
-				visibility: hidden;
+			.iconparcel{
+				background: url(../images/sprite.png) -89px -24px no-repeat;
 			}
-				.iconparcei,.iconpost,.iconprint,.iconorder,.iconreturn{
-					width: 14px;
-					height: 15px;					
-					float: left;
-					position: relative;
-					top: 4px;
-					left: 12px;
-				}
-				.iconparcei{
-					background: url(../images/sprite.png) -88px -24px no-repeat;
-				}
-				.iconpost{
-					width: 18px;
-					height: 15px;
-					background: url(../images/sprite.png) -88px -39px no-repeat;
-				}
-				.iconprint{
-					background: url(../images/sprite.png) -88px -53px no-repeat;
-				}
-				.iconorder{
-					background: url(../images/sprite.png) -88px -69px no-repeat;
-				}
-				.iconreturn{
-					background: url(../images/sprite.png) -88px -83px no-repeat;
-				}
+			.iconpost{
+				width: 18px;
+				height: 15px;
+				background: url(../images/sprite.png) -87px -39px no-repeat;
+			}
+			.iconprint{
+				background: url(../images/sprite.png) -89px -54px no-repeat;
+			}
+			.iconorder{
+				background: url(../images/sprite.png) -89px -68px no-repeat;
+			}
+			.iconreturn{
+				background: url(../images/sprite.png) -88px -83px no-repeat;
+			}
 
-				.chn{
-					color: #fff;
-					font: normal 1.1em "Microsoft YaHei",Sans-Serif;
-					float: left;
-					margin-left:20px;
-					letter-spacing: 6px;
-				}
-				.eng{
-					color: #6eaa88;
-					font: normal 0.2em "Microsoft YaHei",Sans-Serif;
-					float: left;
-					margin-left: 32px;
-				}
+			.chn{
+				color: #fff;
+				font: normal 1.1em "Microsoft YaHei",Sans-Serif;
+				float: left;
+				margin-left:12px;
+				letter-spacing: 5px;
+			}
+			.eng{
+				color: #6eaa88;
+				font: normal 0.2em "Microsoft YaHei",Sans-Serif;
+				margin-left: 24px;
+				text-decoration: none;
+			}
 
-/*		搜索菜单的样式		*/
-.menuplay{
-	display: block;
-}
-	.barplay{
-		margin-right: 45%;
-	}
 /*		搜索项的背景样式		*/
 
 .sortbg{
 	background-color: #000;
 }
+/*		蒙版		*/
+.bg{
+	height: 100%;
+	width: 57%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	background-color: rgba(0,0,0,0);
+}
+	.addbg{
+		z-index: 2;
+	}
