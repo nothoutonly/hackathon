@@ -4,13 +4,14 @@ a, img {
 }
 html, body {
     -webkit-user-select: none;   /* 禁止选中文本（如无文本选中需求，此为必选项） */
-    user-select: none; 
+    user-select: none;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 body {
     font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
     font-size: 16px;
-    height: 100%;
-    width: 100%;
 }
 
 /*		header		*/
@@ -19,12 +20,13 @@ body {
 	height: 40px;
 	background: #acd9bf;
 	border-bottom: 4px solid #72a286;
+	position: fixed;
 }
 	#head{
 		width: 100%;
-		height: 23px;
+		height: 22px;
 		float: left;
-		margin-top: 10px; 
+		margin-top: 8px; 
 	}
 		#logo{
 			width: 105px;
@@ -55,59 +57,74 @@ body {
 #container{
 	float: left;
 	width: 100%;
-	height: 556px;
+	height: 100%;
 	background: url(../images/background.png) repeat;
 	overflow: hidden;
 }
 	#content{
 		width: 86%;
-		height: 83%;
+		height: 80%;
 		position: relative;
-		margin: 16px auto 0;
+		margin: 60px auto 0;
 		border-radius: 16px;
 		-moz-border-radius: 16px;
 		background-color: rgba(0,0,0,.34);
 
 	}
-		#Box{
-			
-		}
-		
-				#title ul{
-					height: 18px;
-					padding: 12px 8px 8px;
+			/*		列表头部		*/
+			#title ul{
+				height: 7%;
+				padding: 12px 8px 4px;
+			}
+				#title ul li{
+					text-align: center;
+					display: inline-block;
+					width: 20%;
+					font: normal .5em "YouYuan",Sans-Serif;
 				}
-					#title ul li{
-						text-align: center;
-						display: inline-block;
-						width: 20%;
-						font: normal .5em "YouYuan",Sans-Serif;
-					}
-					#title ul li:nth-child(4){
-						width: 30%;
-					}
+				#title ul li:nth-child(4){
+					width: 30%;
+				}
+			/*		列表内容		*/	
+			#list{
+				overflow-y: scroll;
+				height: 93%;
+			}
 				.info ul{
 					height: 18px;
 					color: #fff;
 					margin: 2px 8px;
+					letter-spacing: 2px;
 				}
 					.info ul li{
+						float: left;
 						text-align: center;
 						display: inline-block;
 						width: 20%;
-						font: normal .9375em "Microsoft YaHei",Sans-Serif;
+						font: lighter 15px "Microsoft YaHei",Sans-Serif;
+						line-height: 15px;
+						text-overflow:ellipsis; 
+						-o-text-overflow:ellipsis;
+						white-space:nowrap; 
+						overflow:hidden;
+						padding-left: 4px;
 					}
 					.info ul li:nth-child(4){
 						width: 30%;
-						font: normal .75em "Microsoft YaHei",Sans-Serif;
+						padding-left: 16px;
+						font: lighter 12px "Microsoft YaHei",Sans-Serif;
+						text-overflow: clip; 
+						-o-text-overflow: clip;
+						letter-spacing: 0px;
+						word-spacing: 40px;
 					}
 
 /*		footer		*/
 #contact{
 	color: #313031;
-	font: normal 0.3em "SimSun",Sans-Serif;
+	font: normal 7px "SimSun",Sans-Serif;
 	position: relative;
-	margin: 24px auto 0;
+	margin: 16px auto 0;
 	text-align: center;
 }
 	#footicon{
@@ -127,16 +144,19 @@ body {
 /*		navagation		*/
 .nav{
 	width: 43%;
-	height: 600px;
+	height: 100%;
 	position: absolute;
 	top: 0;
+	right: 0;
+	display: none;
 	background-color: rgba(0,0,0,.8);
 	overflow: hidden;
-	opacity: 0;
 }
 	.menuplay{
-		right: -43%;
-		z-index: 3;
+		right: -43%;		
+	}
+	.menuoff{
+		display: block;
 	}
 	/*		searchBar		*/
 	#search{
@@ -188,7 +208,7 @@ body {
 	/*		South-North		*/
 	#south-north{
 		position: relative;
-		margin-top: 24%;
+		margin-top: 40px;
 	}
 		#south{
 			width: 80%;
@@ -202,10 +222,10 @@ body {
 				float: left;
 			}
 			.southLogo{
-				background: url(../images/sprite.png) -45px -66px no-repeat;
+				background: url(../images/sprite.png) -45px -23px no-repeat;
 			}
-			.southLogoFocus{
-				background: url(../images/sprite.png) -45px -24px no-repeat;
+			.southLogoFocus{				
+				background: url(../images/sprite.png) -45px -66px no-repeat;
 			}
 			#south a{
 				font: normal 1.25em "Microsoft Yahei",Sans-Serif;
@@ -219,7 +239,7 @@ body {
 			width: 80%;
 			height: 43px;
 			position: relative;
-			margin: 16% auto;
+			margin: 24px auto 0; 
 		}
 			#northLogo{
 				width:43px;
@@ -227,10 +247,10 @@ body {
 				float: left;
 			}
 			.northLogo{
-				background: url(../images/sprite.png) 0 -67px no-repeat;
+				background: url(../images/sprite.png) 0 -23px no-repeat;
 			}
-			.northLogoFocus{
-				background: url(../images/sprite.png) 0 -24px no-repeat;
+			.northLogoFocus{				
+				background: url(../images/sprite.png) 0 -67px no-repeat;
 			}
 
 			#north a{
@@ -246,22 +266,25 @@ body {
 	width: 80%;
 	height: 2px;
 	background-color: #353535;
-	margin: 10% auto;
+	margin: 16px auto;
 }
 
 /*分类栏*/
 #sort{
-	margin: 6% auto;
+	margin: 6px auto;
 }
 	#sort ul{
 		width: 80%;
 		margin: 0 auto;
 	}
 		#sort ul li{
-			margin: 16px auto;
+			margin: 12px auto 0;
 			padding: 6px;
 			display: block;
 			border-radius: 4px;
+		}
+		.sortbg{
+			background-color: #000;
 		}		
 			.iconparcel,.iconpost,.iconprint,.iconorder,.iconreturn{
 				width: 14px;
@@ -296,6 +319,9 @@ body {
 				margin-left:12px;
 				letter-spacing: 5px;
 			}
+				.space{
+					letter-spacing: 16px;
+				}
 			.eng{
 				color: #6eaa88;
 				font: normal 0.2em "Microsoft YaHei",Sans-Serif;
