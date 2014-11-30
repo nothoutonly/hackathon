@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&page=1', function(data) {
+	$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&page=1', function(data) {
 		
 		function toArray(obj) {
 			var arr = [];
@@ -16,9 +16,10 @@ $(document).ready(function() {
 
 	$contentLoadTriggered = false;
 	$('#list').scroll( function() {
-		if($('#list').scrollTop()+$('#list').height()>=$(document).height()){
-				$getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&page=' + , {
-					success: function (msg){
+		var i = 1;		
+		if($('#list').scrollTop() + $('#list').height() >= $(document).height()){
+				var i = i+1;
+					var back = window['back'] = function(data) {
 						function toArray(obj) {
 							var arr = [];
 							for (i in obj) {
@@ -29,13 +30,10 @@ $(document).ready(function() {
 						var list = {list: toArray(data)};
 						var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
 						var views = Mustache.render(template, list);
-						$('#wrapper').html(views);
-					$contentLoadTriggered = false;
-					},
-					error: function (x, e){
-						alert("The call to the server side failed. " +x.responseText);
-					}
-				});
+						$('#list').html(views);
+				};
+				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&page='+i);
+
 		}		
 	});
     /*$('#search input').on('focus', function (event) {// 搜索框的focus事件
