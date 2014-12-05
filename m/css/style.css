@@ -60,7 +60,8 @@ body {
 	height: 100%;
 	background: url(../images/background.png) repeat;
 	overflow: hidden;
-}
+
+	}
 	#content{
 		width: 86%;
 		height: 80%;
@@ -75,12 +76,16 @@ body {
 			#title ul{
 				height: 7%;
 				padding: 12px 8px 4px;
+				font-size: 0;
 			}
 				#title ul li{
 					text-align: center;
 					display: inline-block;
+					width: 25%;
+					font: normal 9px "YouYuan",Sans-Serif;
+				}
+				#title ul li:nth-child(2){
 					width: 20%;
-					font: normal .5em "YouYuan",Sans-Serif;
 				}
 				#title ul li:nth-child(4){
 					width: 30%;
@@ -90,33 +95,42 @@ body {
 				overflow-y: scroll;
 				height: 93%;
 			}
+			.info{
+				margin: 2px 8px;
+			}
 				.info ul{
 					height: 18px;
 					color: #fff;
-					margin: 2px 8px;
+					font-size: 0;
+					zoom: 1;
+					white-space: nowrap;
 					letter-spacing: 2px;
 				}
 					.info ul li{
 						float: left;
 						text-align: center;
 						display: inline-block;
-						width: 20%;
+						width: 25%;
 						font: lighter 15px "Microsoft YaHei",Sans-Serif;
 						line-height: 15px;
 						text-overflow:ellipsis; 
 						-o-text-overflow:ellipsis;
 						white-space:nowrap; 
 						overflow:hidden;
-						padding-left: 4px;
+					}
+					.info ul li:nth-child(2){
+						width: 20%;
 					}
 					.info ul li:nth-child(4){
 						width: 30%;
-						padding-left: 16px;
 						font: lighter 12px "Microsoft YaHei",Sans-Serif;
 						text-overflow: clip; 
 						-o-text-overflow: clip;
 						letter-spacing: 0px;
 						word-spacing: 40px;
+					}
+					li.info:nth-child(4n){
+						border-bottom: 1px solid #adaba8;
 					}
 /*		loading		*/
 #page_loading {
@@ -180,7 +194,7 @@ body {
 	#search{
 		width: 91%;			
 		position: relative;
-		margin: 2% auto 0;
+		margin: 2% auto;
 		border-radius: 6px;
 		background: #f9f9f8;
 		overflow: hidden;
@@ -336,6 +350,7 @@ body {
 				float: left;
 				margin-left:12px;
 				letter-spacing: 5px;
+				text-align: justify;
 			}
 				.space{
 					letter-spacing: 16px;

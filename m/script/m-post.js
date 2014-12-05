@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&page=1', function(data) {
-		
 		function toArray(obj) {
 			var arr = [];
 			for (i in obj) {
@@ -11,35 +10,47 @@ $(document).ready(function() {
 		var list = {list: toArray(data)};
 		var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
 		var views = Mustache.render(template, list);
-		$('#list').html(views);
+		$('#list').append(views);
 	});
-
+	var count = 1;	
 	$contentLoadTriggered = false;
-	$('#list').scroll( function() {
-		var i = 1;		
-		if($('#list').scrollTop() + $('#list').height() >= $(document).height()){
-				var i = i+1;
-					var back = window['back'] = function(data) {
-						function toArray(obj) {
-							var arr = [];
-							for (i in obj) {
-								if(obj.hasOwnProperty(i)) arr.push(obj[i]);
-							}
-							return arr;
-						}
-						var list = {list: toArray(data)};
-						var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
-						var views = Mustache.render(template, list);
-						$('#list').html(views);
-				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&page='+i);
-
-		}		
+	var initHeight = $('#list').height();
+	var initScrool = $('#list').scrollTop();
+	$('#list').bind('scroll', function() {
+		console.log(initScrool, initHeight, $('#list').scrollTop(),(initScrool + initHeight)*count)
+		function draw() {
+			count++;
+			var back = window['back'] = function(data) {
+				function toArray(obj) {
+					var arr = [];
+					for (i in obj) {
+						if(obj.hasOwnProperty(i)) arr.push(obj[i]);
+					}
+					return arr;
+				}
+				var list = {list: toArray(data)};
+				var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
+				var views = Mustache.render(template, list);
+				$('#list').append(views);
+			};
+			$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&page='+count);
+		}
+		if(count === 1) {
+			if( $('#list').scrollTop() + $('#list').height() >= 800 ){
+				initScrool = $('#list').scrollTop();
+				draw();
+			}
+		} else {
+			if ($('#list').scrollTop() + $('#list').height() >= 800*count) {
+				draw();
+			}
+		}
 	});
-    /*$('#search input').on('focus', function (event) {// 搜索框的focus事件
-    	$(this).parent().animate({"width": "200%"}, 300);
-    });*/
 
+    $('#search input').on('focus', function (event) {// 搜索框的focus事件
+    	$(this).parent().css("width","200%");
+    });
+	
 	$('.searchBar a').on('click', function (event) {// 控制搜索菜单的弹出
 		event.preventDefault();
 		$(this).parents('#header').siblings('.nav').addClass('menuplay menuoff').animate({"right":"0%"}, 200);
@@ -66,7 +77,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&area=南区&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&area=南区&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
@@ -96,7 +107,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&area=北区&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&area=北区&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
@@ -128,7 +139,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&type=包裹&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&type=包裹&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
@@ -159,7 +170,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&type=挂号信&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&type=挂号信&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
@@ -190,7 +201,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&type=印刷品&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&type=印刷品&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
@@ -221,7 +232,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&type=汇款单&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&type=汇款单&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
@@ -252,7 +263,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		$.getJSON('http://post.ecjtu.net/api.php/list?&callback=?&limit=40&type=退件&page=1', function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&type=退件&page=1', function(data) {
 		
 			function toArray(obj) {
 				var arr = [];
