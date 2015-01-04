@@ -1,68 +1,22 @@
 $(document).ready(function() {
-	$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&page=1', function(data) {
-		function toArray(obj) {
-			var arr = [];
-			for (i in obj) {
-				if(obj.hasOwnProperty(i)) arr.push(obj[i]);
-			}
-			return arr;
-		}
-		var list = {list: toArray(data)};
-		var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
-		var views = Mustache.render(template, list);
-		$('#list').append(views);
-	});
 	var count = 1;	
-	$contentLoadTriggered = false;
-	$('#list').bind('scroll', function() {
-		function draw() {
-			count++;
-			var back = window['back'] = function(data) {
-				function toArray(obj) {
-					var arr = [];
-					for (i in obj) {
-						if(obj.hasOwnProperty(i)) arr.push(obj[i]);
-					}
-					return arr;
+	function draw() {
+		count++;
+		var back = window['back'] = function(data) {
+			function toArray(obj) {
+				var arr = [];
+				for (i in obj) {
+					if(obj.hasOwnProperty(i)) arr.push(obj[i]);
 				}
-				var list = {list: toArray(data)};
-				var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
-				var views = Mustache.render(template, list);
-				$('#list').append(views);
-				console.log(views)
-				console.log('http://post.ecjtu.net/api.php/list?callback=?&limit=40&area=南区&page='+count)
-			};
-			$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&page='+count);
-		}
-		if(count === 1) {
-			if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-				initScrool = $('#list').scrollTop();
-				draw();
+				return arr;
 			}
-		} else {
-			if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
-				draw();									
-			}
-		}
-	});
-
-	
-    $('#search input').on('focus', function (event) {// 搜索框的focus事件
-    	$('body').addClass('searchbg');
-    	$(this).parent().addClass('searchFocus');
-    });
-	
-	$('.searchBar a').on('click', function (event) {// 控制搜索菜单的弹出
-		event.preventDefault();
-		$(this).parents('#header').siblings('.nav').addClass('menuplay menuoff').animate({"right":"0%"}, 200);
-		$('.bg').addClass('addbg');
-	});
-	$('.bg').on('click',function (event) {// 控制搜索菜单的缩回
-		$('.nav').animate({"right": "-43%"}, 200).removeClass('menuplay');
-		$('.bg').removeClass('addbg');
-	});
-
-
+			var list = {list: toArray(data)};
+			var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
+			var views = Mustache.render(template, list);
+			$('#list').append(views);
+		};
+		$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&area=南区&page='+count);
+	}
 	/*		南北区搜索		*/
 	$('#south a').on('click', function (event) {// 控制南区搜索项	
 		event.preventDefault();
@@ -78,8 +32,7 @@ $(document).ready(function() {
 			$('.nav').delay(200).animate({"right": "-43%"}, 200).removeClass('menuplay');
 			$('.bg').removeClass('addbg');
 		}
-		var scount = 1;	
-		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&area=南区&page='+scount, function(data) {
+		$.getJSON('http://post.ecjtu.net/api.php/list?callback=?&limit=40&area=南区&page=1', function(data) {
 			function toArray(obj) {
 				var arr = [];
 				for (i in obj) {
@@ -92,34 +45,22 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});
+		
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function sdraw() {
-				scount++;
-				var back = window['back'] = function(data) {
-					function toArray(obj) {
-						var arr = [];
-						for (i in obj) {
-							if(obj.hasOwnProperty(i)) arr.push(obj[i]);
-						}
-						return arr;
-					}
-					var list = {list: toArray(data)};
-					var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
-					var views = Mustache.render(template, list);
-					$('#list').append(views);
-					console.log(views)
-					console.log('http://post.ecjtu.net/api.php/list?callback=?&limit=40&area=南区&page='+scount)
-				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&area=南区&page='+scount);
-			}
-			if(scount === 1) {
+			
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-					sdraw();
+					initScrool = $('#list').scrollTop();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*scount) {
-					sdraw();										
+				if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
+
+					draw();
+					console.log($('#list').scrollTop() + $('#list').height())
+					console.log(count)
+					console.log(890*count)					
 				}
 			}
 		});
@@ -151,34 +92,18 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});		
-		var ncount = 1;
+		
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function ndraw() {
-			ncount++;
-			var back = window['back'] = function(data) {
-				function toArray(obj) {
-					var arr = [];
-					for (i in obj) {
-						if(obj.hasOwnProperty(i)) arr.push(obj[i]);
-					}
-					return arr;
-				}
-				var list = {list: toArray(data)};
-				var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
-				var views = Mustache.render(template, list);
-				$('#list').append(views);
-			};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&area=北区&page='+ncount);
-			}
-			if(ncount === 1) {
+
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
 					initScrool = $('#list').scrollTop();
-					ndraw();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*ncount) {
-					ndraw();
+				if ($('#list').scrollTop() + $('#list').height() >= 898*count) {
+					draw();
 				}
 			}
 		});
@@ -221,11 +146,11 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});
-		var pcount = 1;	
+		var count = 1;	
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function pdraw() {
-				pcount++;
+			function draw() {
+				count++;
 				var back = window['back'] = function(data) {
 					function toArray(obj) {
 						var arr = [];
@@ -238,18 +163,16 @@ $(document).ready(function() {
 					var template = "<ul>{{#list}}<li class='info'><ul><li>{{addressee}}</li><li>{{area}}</li><li>{{type}}</li><li>{{time}}</li></ul></li>{{/list}}</ul>";
 					var views = Mustache.render(template, list);
 					$('#list').append(views);
-					console.log(views)
 				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=包裹&page='+pcount);
+				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=包裹&page='+count);
 			}
-			if(pcount === 1) {
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-					pdraw();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*pcount) {
-					pdraw();
-
+				if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
+					draw();
 				}
 			}
 		});			
@@ -279,11 +202,11 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});
-		var pocount = 1;	
+		var count = 1;	
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function podraw() {
-				pocount++;
+			function draw() {
+				count++;
 				var back = window['back'] = function(data) {
 					function toArray(obj) {
 						var arr = [];
@@ -297,15 +220,15 @@ $(document).ready(function() {
 					var views = Mustache.render(template, list);
 					$('#list').append(views);
 				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=挂号信&page='+pocount);
+				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=挂号信&page='+count);
 			}
-			if(pocount === 1) {
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-					podraw();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*pocount) {
-					podraw();
+				if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
+					draw();
 				}
 			}
 		});	
@@ -335,11 +258,11 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});
-		var prcount = 1;	
+		var count = 1;	
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function prdraw() {
-				prcount++;
+			function draw() {
+				count++;
 				var back = window['back'] = function(data) {
 					function toArray(obj) {
 						var arr = [];
@@ -353,15 +276,15 @@ $(document).ready(function() {
 					var views = Mustache.render(template, list);
 					$('#list').append(views);
 				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=印刷品&page='+prcount);
+				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=印刷品&page='+count);
 			}
-			if(prcount === 1) {
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-					prdraw();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*prcount) {
-					prdraw();
+				if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
+					draw();
 				}
 			}
 		});	
@@ -391,11 +314,11 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});
-		var ocount = 1;	
+		var count = 1;	
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function odraw() {
-				ocount++;
+			function draw() {
+				count++;
 				var back = window['back'] = function(data) {
 					function toArray(obj) {
 						var arr = [];
@@ -409,15 +332,15 @@ $(document).ready(function() {
 					var views = Mustache.render(template, list);
 					$('#list').append(views);
 				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=汇款单&page='+ocount);
+				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=汇款单&page='+count);
 			}
-			if(ocount === 1) {
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-					odraw();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*ocount) {
-					odraw();
+				if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
+					draw();
 				}
 			}
 		});	
@@ -447,11 +370,11 @@ $(document).ready(function() {
 			var views = Mustache.render(template, list);
 			$('#list').append(views);
 		});
-		var rcount = 1;	
+		var count = 1;	
 		$contentLoadTriggered = false;
 		$('#list').bind('scroll', function() {
-			function rdraw() {
-				rcount++;
+			function draw() {
+				count++;
 				var back = window['back'] = function(data) {
 					function toArray(obj) {
 						var arr = [];
@@ -465,15 +388,15 @@ $(document).ready(function() {
 					var views = Mustache.render(template, list);
 					$('#list').append(views);
 				};
-				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=退件&page='+rcount);
+				$.getScript('http://post.ecjtu.net/api.php/list?callback=back&limit=40&type=退件&page='+count);
 			}
-			if(rcount === 1) {
+			if(count === 1) {
 				if( $('#list').scrollTop() + $('#list').height() >= 894 ){
-					rdraw();
+					draw();
 				}
 			} else {
-				if ($('#list').scrollTop() + $('#list').height() >= 890*rcount) {
-					rdraw();
+				if ($('#list').scrollTop() + $('#list').height() >= 890*count) {
+					draw();
 				}
 			}
 		});	
